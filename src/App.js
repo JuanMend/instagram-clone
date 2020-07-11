@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Post from './Post';
-import { db } from './firebase';
+import { db, auth } from './firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import { Input } from '@material-ui/core';
+import Input from '@material-ui/core/Input';
+import ImageUpload from './components/ImageUpload/ImageUpload';
 
 function getModalStyle() {
 	const top = 50;
@@ -34,9 +35,11 @@ function App() {
 	const [modalStyle] = useState(getModalStyle());
 	const [posts, setPosts] = useState([]);
 	const [open, setOpen] = useState(false);
+	const [openSignIn, setOpenSignIn] = useState(false);
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [email, setEmail] = useState('');
+	const [user, setUser] = useState(null);
 
 	// Runs a piece of code based on a specific condition
 	useEffect(() => {
@@ -54,10 +57,48 @@ function App() {
 		});
 	}, []); // If it's empty its going to run once the page loads and it's not going to run again
 
-	const signUp = (e) => {};
+	useEffect(
+		() => {
+			const unsubscribe = auth.onAuthStateChanged((authUser) => {
+				if (authUser) {
+					// user has Logged in...
+					setUser(authUser);
+				} else {
+					// User has logged out...
+					setUser(null);
+				}
+			});
+
+			return () => {
+				// perform some cleanup actions
+				unsubscribe();
+			};
+		},
+		[user, username]
+	);
+
+	const signUp = (e) => {
+		e.preventDefault();
+		auth
+			.createUserWithEmailAndPassword(email, password)
+			.then((authUser) => {
+				return authUser.user.updateProfile({
+					displayName: username
+				});
+			})
+			.catch((error) => alert(error.message));
+		setOpen(false);
+	};
+
+	const signIn = (e) => {
+		e.preventDefault();
+		auth.signInWithEmailAndPassword(email, password).catch((error) => alert(error.message));
+		setOpenSignIn(false);
+	};
 
 	return (
 		<div className="app">
+			<ImageUpload />
 			<Modal open={open} onClose={() => setOpen(false)}>
 				<div style={modalStyle} className={classes.paper}>
 					<form className="app__signup">
@@ -72,7 +113,7 @@ function App() {
 							placeholder="username"
 							type="text"
 							value={username}
-							onChange={(e) => setEmail(e.target.value)}
+							onChange={(e) => setUsername(e.target.value)}
 						/>
 						<Input
 							placeholder="email"
@@ -86,7 +127,39 @@ function App() {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
-						<Button onClick={signUp}>Sign Up</Button>
+						<Button type="submit" onClick={signUp}>
+							Sign Up
+						</Button>
+					</form>
+				</div>
+			</Modal>
+
+			<Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
+				<div style={modalStyle} className={classes.paper}>
+					<form className="app__signup">
+						<center>
+							<img
+								className="app__headerImage"
+								src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+								alt="logo"
+							/>
+						</center>
+
+						<Input
+							placeholder="email"
+							type="text"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+						<Input
+							placeholder="password"
+							type="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+						<Button type="submit" onClick={signIn}>
+							Sign In
+						</Button>
 					</form>
 				</div>
 			</Modal>
@@ -97,7 +170,14 @@ function App() {
 					alt="logo"
 				/>
 			</div>
-			<Button onClick={() => setOpen(true)}>Sign Up</Button>
+			{user ? (
+				<Button onClick={() => auth.signOut()}>Logout</Button>
+			) : (
+				<div>
+					<Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+					<Button onClick={() => setOpen(true)}>Sign Up</Button>
+				</div>
+			)}
 
 			{posts.map(({ id, post }) => {
 				return (
