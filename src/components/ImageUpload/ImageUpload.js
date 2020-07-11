@@ -4,7 +4,17 @@ import Button from '@material-ui/core/Button';
 import firebase from 'firebase';
 import { db, storage } from '../../firebase';
 
+import { makeStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+const useStyles = makeStyles({
+	root: {
+		width: '100%'
+	}
+});
+
 function ImageUpload({ username }) {
+	const classes = useStyles();
 	const [caption, setCaption] = useState('');
 	const [image, setImage] = useState(null);
 	const [progress, setProgress] = useState(0);
@@ -50,14 +60,20 @@ function ImageUpload({ username }) {
 
 	return (
 		<div className="imageupload">
-			<progress className="imageupload__progress" value={progress} max="100" />
-			<input
+			{/* <progress className="imageupload__progress" value={progress} max="100" />
+             */}
+			<LinearProgress className="imageupload__progress" max="100" variant="determinate" value={progress} />
+
+			<textarea
+				className="imageupload__caption"
 				type="text"
 				value={caption}
 				placeholder="Enter a caption"
 				onChange={(e) => setCaption(e.target.value)}
 			/>
-			<input type="file" onChange={handleChange} />
+			{/* <input type="file" onChange={handleChange} /> */}
+			<input type="file" id="file" onChange={handleChange} />
+			<label for="file">choose a file</label>
 			<Button onClick={handleUpload} className="imageupload__button">
 				Upload
 			</Button>

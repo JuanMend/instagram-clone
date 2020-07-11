@@ -35,3 +35,7 @@
 .app__postsRight {
 	margin-left: 40px;
 }
+
+.app__loadContent {
+	padding: 40px;
+}
