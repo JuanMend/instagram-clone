@@ -1,23 +1,27 @@
 * {
-	margin: 0;
+  margin: 0;
 }
 
 .app__posts {
-	padding: 40px;
-	display: flex;
-	justify-content: center;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
 }
 .app {
-	background-color: #fafafa;
+  background-color: #fafafa;
 }
 
 .app__postsLeft {
 }
 
 .app__postsRight {
-	margin-left: 40px;
+  margin-left: 40px;
 }
 
 .app__loadContent {
-	/* padding: 40px; */
+  /* padding: 40px; */
+}
+.app__uploadText {
+  margin-bottom: 10px;
+  font-size: 24px;
 }
