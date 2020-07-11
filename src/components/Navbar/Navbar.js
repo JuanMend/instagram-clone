@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./Navbar.css";
 import {db, auth} from "../../firebase";
+import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
 // import ImageUpload from '../ImageUpload/ImageUpload';
 
@@ -153,11 +154,14 @@ function Navbar() {
         {user ? (
           <div className="navbar__logout">
             <Button onClick={() => auth.signOut()}>Logout</Button>
-            <Avatar
-              className="post__avatar"
-              alt={username.toUpperCase()}
-              src="/static/images/avatar/1.jpg"
-            />
+            <Link to="/profile">
+              {" "}
+              <Avatar
+                className="post__avatar"
+                alt={username.toUpperCase()}
+                src="/static/images/avatar/1.jpg"
+              />
+            </Link>
           </div>
         ) : (
           <div>
