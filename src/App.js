@@ -46,7 +46,7 @@ function App() {
 		// Where the code Runs
 		// On Snapshot is a listener
 		// Everytime a document changes, modifies it takes a snapshot of the document and it updates it
-		db.collection('posts').onSnapshot((snapshot) => {
+		db.collection('posts').orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
 			// every time a new post is added, this code fires
 			setPosts(
 				snapshot.docs.map((doc) => ({
@@ -98,7 +98,11 @@ function App() {
 
 	return (
 		<div className="app">
-			<ImageUpload />
+			{user?.displayName ? (
+				<ImageUpload username={user.displayName} />
+			) : (
+				<h3> Sorry You Need to login to upload</h3>
+			)}
 			<Modal open={open} onClose={() => setOpen(false)}>
 				<div style={modalStyle} className={classes.paper}>
 					<form className="app__signup">
