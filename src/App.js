@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Post from './components/Post/Post';
 import Navbar from './components/Navbar/Navbar';
-import { db,auth } from './firebase';
+import { db, auth } from './firebase';
 import InstagramEmbed from 'react-instagram-embed';
-import ImageUpload from './components/ImageUpload/ImageUpload'
+import ImageUpload from './components/ImageUpload/ImageUpload';
 
 function App() {
 	const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState(null);
-  const [username, setUsername] = useState('')
+	const [user, setUser] = useState(null);
+	const [username, setUsername] = useState('');
 
 	// Runs a piece of code based on a specific condition
 	useEffect(() => {
@@ -25,9 +25,9 @@ function App() {
 				}))
 			);
 		});
-  }, []); // If it's empty its going to run once the page loads and it's not going to run again
-  
-  useEffect(
+	}, []); // If it's empty its going to run once the page loads and it's not going to run again
+
+	useEffect(
 		() => {
 			const unsubscribe = auth.onAuthStateChanged((authUser) => {
 				if (authUser) {
@@ -48,7 +48,7 @@ function App() {
 	);
 	return (
 		<div className="app">
-     <Navbar/>
+			<Navbar />
 
 			<div className="app__posts">
 				<div className="app__postsLeft">
@@ -67,9 +67,11 @@ function App() {
 						);
 					})}
 				</div>
-       
 
 				<div className="app__postsRight">
+        <div className="app__loadContent">
+				{user?.displayName ? <ImageUpload username={user.displayName} /> : <h3>Login to upload</h3>}
+			</div>
 					<InstagramEmbed
 						url="https://www.instagram.com/p/CCZvqv9F-jM/"
 						maxWidth={320}
@@ -84,13 +86,7 @@ function App() {
 					/>
 				</div>
 			</div>
-      <div className='app__loadContent'>
-      {user?.displayName ? (
-				<ImageUpload username={user.displayName} />
-			) : (
-				<h3>Login to upload</h3>
-			)}
-      </div>
+			
 		</div>
 	);
 }

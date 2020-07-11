@@ -1,20 +1,7 @@
 * {
 	margin: 0;
 }
-.app__header {
-	object-fit: contain;
-	background-color: white;
-	padding: 20px;
-	border-bottom: 1px solid lightgray;
-	display: flex;
-	justify-content: space-between;
-	position: sticky;
-	top: 0;
-	z-index: 1;
-}
-.app__headerImage {
-	object-fit: contain;
-}
+
 .app__posts {
 	padding: 40px;
 	display: flex;
@@ -22,11 +9,6 @@
 }
 .app {
 	background-color: #fafafa;
-}
-
-.app__signup {
-	display: flex;
-	flex-direction: column;
 }
 
 .app__postsLeft {
@@ -37,5 +19,5 @@
 }
 
 .app__loadContent {
-	padding: 40px;
+	/* padding: 40px; */
 }

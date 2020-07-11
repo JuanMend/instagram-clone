@@ -83,10 +83,10 @@ function Navbar() {
 		<div className="app__header">
 			<Modal open={open} onClose={() => setOpen(false)}>
 				<div style={modalStyle} className={classes.paper}>
-					<form className="app__signup">
+					<form className="navbar__signup">
 						<center>
 							<img
-								className="app__headerImage"
+								className="navbar__headerImage"
 								src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
 								alt="logo"
 							/>
@@ -118,10 +118,10 @@ function Navbar() {
 
 			<Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
 				<div style={modalStyle} className={classes.paper}>
-					<form className="app__signup">
+					<form className="navbar__signup">
 						<center>
 							<img
-								className="app__headerImage"
+								className="navbar__headerImage"
 								src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
 								alt="logo"
 							/>
@@ -145,14 +145,14 @@ function Navbar() {
 					</form>
 				</div>
 			</Modal>
-			<div className="app__header">
+			<div className="navbar__header">
 				<img
-					className="app__headerImage"
+					className="navbar__headerImage"
 					src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
 					alt="logo"
 				/>
 				{user ? (
-					<div>
+					<div className="navbar__logout">
 						<Button onClick={() => auth.signOut()}>Logout</Button>
 						<Avatar
 							className="post__avatar"
