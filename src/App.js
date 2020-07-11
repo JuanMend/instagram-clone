@@ -7,6 +7,7 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import ImageUpload from './components/ImageUpload/ImageUpload';
+import InstagramEmbed from 'react-instagram-embed';
 
 function getModalStyle() {
 	const top = 50;
@@ -98,11 +99,7 @@ function App() {
 
 	return (
 		<div className="app">
-			{user?.displayName ? (
-				<ImageUpload username={user.displayName} />
-			) : (
-				<h3> Sorry You Need to login to upload</h3>
-			)}
+	
 			<Modal open={open} onClose={() => setOpen(false)}>
 				<div style={modalStyle} className={classes.paper}>
 					<form className="app__signup">
@@ -173,8 +170,7 @@ function App() {
 					src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
 					alt="logo"
 				/>
-			</div>
-			{user ? (
+        	{user ? (
 				<Button onClick={() => auth.signOut()}>Logout</Button>
 			) : (
 				<div>
@@ -183,13 +179,44 @@ function App() {
 				</div>
 			)}
 
+			</div>
+
+      <div className='app__posts'>
+
+        <div className='app__postsLeft'>
+
 			{posts.map(({ id, post }) => {
 				return (
 					<div>
-						<Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+						<Post key={id} postId={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
 					</div>
 				);
 			})}
+
+        </div>
+
+        <div className='app__postsRight'>
+
+      <InstagramEmbed
+      url='https://www.instagram.com/p/CCZvqv9F-jM/'
+      maxWidth={320}
+      hideCaption={false}
+      containerTagName='div'
+      protocol=''
+      injectScript
+      onLoading={() => {}} 
+      onSuccess={() => {}} 
+      onAfterRender={() => {}} 
+      onFailure={() => {}} 
+      />
+        </div>
+      </div>
+		
+      		{user?.displayName ? (
+				<ImageUpload username={user.displayName} />
+			) : (
+				<h3> Sorry You Need to login to upload</h3>
+			)}
 		</div>
 	);
 }
