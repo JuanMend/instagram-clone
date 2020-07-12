@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import "./Post.css";
+import {Link} from "react-router-dom";
 import {db} from "../../firebase";
 import firebase from "firebase";
 
@@ -11,6 +12,7 @@ function Post({postId, user, username, caption, imageUrl}) {
   const [comment, setComment] = useState("");
 
   useEffect(() => {
+    //   let unsubscribe;
     if (postId) {
       db.collection("posts")
         .doc(postId)
@@ -22,7 +24,7 @@ function Post({postId, user, username, caption, imageUrl}) {
     }
 
     // return () => {
-    //   disposeMe.unsubscribe();
+    //   unsubscribe();
     // };
   }, [postId]);
 
@@ -39,12 +41,18 @@ function Post({postId, user, username, caption, imageUrl}) {
   return (
     <div className="post">
       <div className="post__header">
-        <Avatar
-          className="post__avatar"
-          alt={username.toUpperCase()}
-          src="/static/images/avatar/1.jpg"
-        />
-        <h3>{username}</h3>
+        <Link
+          to="/profile"
+          className="post__linkProfile"
+          style={{textDecoration: "none", color: "black"}}
+        >
+          <Avatar
+            className="post__avatar"
+            alt={username.toUpperCase()}
+            src="/static/images/avatar/1.jpg"
+          />
+          <h3>{username}</h3>
+        </Link>
       </div>
       <img className="post__image" src={imageUrl} />
       <FavoriteBorderIcon className="post__heartIcon" />

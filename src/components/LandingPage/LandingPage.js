@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import "../../App.css";
+import "./LandingPage.css";
 import Post from "../Post/Post";
 
 import {db, auth} from "../../firebase";
@@ -46,8 +46,8 @@ function LandingPage() {
   }, [user, username]);
   return (
     <div>
-      <div className="app__posts">
-        <div className="app__postsLeft">
+      <div className="navbar__posts">
+        <div className="navbar__postsLeft">
           {posts.map(({id, post}) => {
             return (
               <div>
@@ -64,15 +64,16 @@ function LandingPage() {
           })}
         </div>
 
-        <div className="app__postsRight">
-          <div className="app__loadContent">
+        <div className="navbar__postsRight">
+          <div className="navbar__loadContent">
             {user?.displayName ? (
               <ImageUpload username={user.displayName} />
             ) : (
-              <h3>Login to upload</h3>
+              <h3>Login to upload/After Signup refresh the page</h3>
             )}
           </div>
           <InstagramEmbed
+            className="navbar__embed"
             url="https://www.instagram.com/p/CCZvqv9F-jM/"
             maxWidth={320}
             hideCaption={false}
