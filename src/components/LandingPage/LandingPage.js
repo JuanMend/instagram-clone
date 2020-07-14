@@ -46,8 +46,8 @@ function LandingPage() {
   }, [user, username]);
   return (
     <div>
-      <div className="navbar__posts">
-        <div className="navbar__postsLeft">
+      <div className="home__posts">
+        <div className="home__postsLeft">
           {posts.map(({id, post}) => {
             return (
               <div>
@@ -64,16 +64,18 @@ function LandingPage() {
           })}
         </div>
 
-        <div className="navbar__postsRight">
-          <div className="navbar__loadContent">
+        <div className="home__postsRight">
+          <div className="home__loadContent">
             {user?.displayName ? (
               <ImageUpload username={user.displayName} />
             ) : (
-              <h3>Login to upload/After Signup refresh the page</h3>
+              <h3 className="home__text">
+                Login to upload/After Signup refresh the page
+              </h3>
             )}
           </div>
           <InstagramEmbed
-            className="navbar__embed"
+            className="home__embed"
             url="https://www.instagram.com/p/CCZvqv9F-jM/"
             maxWidth={320}
             hideCaption={false}

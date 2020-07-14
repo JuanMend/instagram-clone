@@ -80,7 +80,7 @@ function Navbar() {
     setOpenSignIn(false);
   };
   return (
-    <div className="app__header">
+    <div className="navbar__header">
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
           <form className="navbar__signup">
@@ -145,7 +145,7 @@ function Navbar() {
           </form>
         </div>
       </Modal>
-      <div className="navbar__header">
+      <div className="navbar__headerAuth">
         <Link to="/">
           <img
             className="navbar__headerImage"
@@ -159,7 +159,7 @@ function Navbar() {
             <Link to="/profile">
               {" "}
               <Avatar
-                className="post__avatar"
+                className="navbar__avatar"
                 alt={username.toUpperCase()}
                 src="/static/images/avatar/1.jpg"
               />
