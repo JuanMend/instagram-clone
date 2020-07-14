@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./ImageUpload.css";
 import Button from "@material-ui/core/Button";
 import firebase from "firebase";
-import {db, storage} from "../../firebase";
+import {db, storage} from "../../Firebase/firebase";
 
 import {makeStyles} from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";

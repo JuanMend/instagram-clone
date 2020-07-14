@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import "./Navbar.css";
-import {db, auth} from "../../firebase";
+import {db, auth} from "../../Firebase/firebase";
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
 // import ImageUpload from '../ImageUpload/ImageUpload';

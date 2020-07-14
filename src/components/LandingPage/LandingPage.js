@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./LandingPage.css";
 import Post from "../Post/Post";
 
-import {db, auth} from "../../firebase";
+import {db, auth} from "../../Firebase/firebase";
 import InstagramEmbed from "react-instagram-embed";
 import ImageUpload from "../ImageUpload/ImageUpload";
 function LandingPage() {

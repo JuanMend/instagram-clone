@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./Post.css";
 import {Link} from "react-router-dom";
-import {db} from "../../firebase";
+import {db} from "../../Firebase/firebase";
 import firebase from "firebase";
 
 import Avatar from "@material-ui/core/Avatar";
