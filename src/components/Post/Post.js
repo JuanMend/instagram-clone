@@ -5,7 +5,6 @@ import {db} from "../../firebase";
 import firebase from "firebase";
 
 import Avatar from "@material-ui/core/Avatar";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 function Post({postId, user, username, caption, imageUrl}) {
   const [comments, setComments] = useState([]);
@@ -55,8 +54,7 @@ function Post({postId, user, username, caption, imageUrl}) {
         </Link>
       </div>
       <img className="post__image" src={imageUrl} />
-      <FavoriteBorderIcon className="post__heartIcon" />
-      <p className="post__numberLikes">12 likes</p>
+
       <h4 className="post__text">
         <strong>{username}: </strong> {caption}
       </h4>
