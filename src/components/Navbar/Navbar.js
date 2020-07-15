@@ -3,7 +3,6 @@ import "./Navbar.css";
 import {db, auth} from "../../Firebase/firebase";
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
-// import ImageUpload from '../ImageUpload/ImageUpload';
 
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
