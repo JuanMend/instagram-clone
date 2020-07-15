@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 .env
-src/Firebase/firebase.js
+/src/Firebase/firebase.js
 
 
 # testing
